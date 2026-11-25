@@ -1,11 +1,12 @@
 // 登録簿の索引（`plugins/<id>.json`）を検査する（判断だけ。ファイルの読み込みは呼ぶ側が EntryFile で渡す）。
 // ADR-0004 の安全原則に従い、投稿されたプラグインのコードは取りに行かず、動かさない。
-// ここで見るのは、スキーマ・ファイル名と ID の一致・apiVersion・ライセンスの表記・版の並び・URL の形まで。
+// ここで見るのは、スキーマ・ファイル名と ID の一致・apiVersion・ライセンスの表記・版の並び・URL の形・持ち主（changes.ts）まで。
 
 import Ajv2020, { type ErrorObject } from "ajv/dist/2020.js";
 import { API_VERSION, type RegistryEntry } from "modelith-plugin-sdk";
 import semver from "semver";
 import parseSpdx from "spdx-expression-parse";
+import { checkOwnership } from "./changes.ts";
 
 /** 検査する索引のファイル 1 つ。 */
 export interface EntryFile {
@@ -59,6 +60,7 @@ export function checkEntry(fileName: string, entry: RegistryEntry): string[] {
     ...checkLicense(entry.license),
     ...checkHttps("repository", entry.repository),
     ...checkVersions(entry.versions),
+    ...checkOwnership(entry),
   ];
 }
 
