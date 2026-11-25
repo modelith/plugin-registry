@@ -2,6 +2,9 @@
 
 The index of [Modelith](https://github.com/modelith/modelith) plugins. It holds one JSON file per plugin, not the plugins themselves.
 
+Every change to `main` is combined into one file, the [registry index](https://github.com/modelith/plugin-sdk/blob/dev/schema/registry-index.schema.json),
+and published at <https://registry.modelith-studio.org/index.json>.
+
 ## Adding a plugin
 
 1. Publish your plugin from its own repository, and attach the package to a release.
@@ -48,6 +51,7 @@ npm ci
 npm run typecheck
 npm test
 npm run check    # checks plugins/
+npm run build    # checks plugins/, then writes dist/index.json
 ```
 
-The rules live in `src/check.ts`, and `src/main.ts` only reads the files and prints the problems.
+The rules live in `src/check.ts` and `src/build.ts`. `src/main.ts`, `src/build-main.ts` and `src/io.ts` only read and write files.
