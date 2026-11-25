@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "check": "node src/main.ts plugins",
+    "build": "node src/build-main.ts plugins dist",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },
