@@ -27,7 +27,7 @@ function entry(overrides: Partial<RegistryEntry> = {}): RegistryEntry {
     runtime: "rules",
     license: "MIT",
     pricing: "free",
-    versions: [{ version: "0.1.0", url: "https://example.com/plugin-0.1.0.zip", sha256: SHA }],
+    versions: [{ version: "0.1.0", url: "https://github.com/example-inc/modelith-fmea/releases/download/v0.1.0/plugin.zip", sha256: SHA }],
     ...overrides,
   };
 }
